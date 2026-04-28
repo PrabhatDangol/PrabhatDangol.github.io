@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prabhat Dangol — Fitness Coach</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+
+<!-- EmailJS SDK v3 — same as working example -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  emailjs.init("x-7_Ac7EqBddgObyW");
+
+  const contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+    emailjs.sendForm(
+      "service_q7s5he9",
+      "template_57f1kp4",
+      document.getElementById('orderForm')
+    )
+    });
+  }
+
+});
+</script>
+
+<style>
+  :root {
+    --black: #0a0a0a;
+    --charcoal: #111111;
+    --card: #161616;
+    --border: #252525;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --white: #f5f0e8;
+    --muted: #888880;
+    --accent: #c9a84c;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-line {
+    position: absolute;
+    top: 0; right: 38%;
+    width: 1px; height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--border) 20%, var(--border) 80%, transparent);
+  }
+  .hero-text { position: relative; z-index: 2; }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.35rem 0.9rem;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 8vw, 7.5rem);
+    line-height: 0.9;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-name span { color: var(--gold); }
+  .hero-subtitle {
+    margin-top: 1.8rem;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 400px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: none;
+    padding: 0.85rem 2rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    padding: 0.85rem 2rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.25s, color 0.25s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  /* ── HERO IMAGE ── */
+  .hero-image-wrap {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 85vh;
+    z-index: 2;
+    animation: fadeIn 1s 0.2s ease both;
+  }
+  .hero-image-wrap::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 70%; height: 70%;
+    background: radial-gradient(ellipse at center, rgba(201,168,76,0.12) 0%, transparent 70%);
+    z-index: 0;
+  }
+  .hero-img {
+    height: 100%;
+    max-height: 82vh;
+    width: auto;
+    object-fit: cover;
+    object-position: top;
+    position: relative;
+    z-index: 1;
+    filter: grayscale(15%) contrast(1.05);
+  }
+
+  /* ── SECTION SHARED ── */
+  section { position: relative; z-index: 1; }
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  /* ── SERVICES ── */
+  #services {
+    padding: 7rem 4rem;
+    border-top: 1px solid var(--border);
+  }
+  .services-header { max-width: 520px; margin-bottom: 4rem; }
+  .services-header p {
+    margin-top: 1.2rem;
+    color: var(--muted);
+    line-height: 1.75;
+    font-size: 0.95rem;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+  }
+  .service-card {
+    background: var(--card);
+    padding: 2.8rem 2.4rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    height: 2px; width: 0;
+    background: var(--gold);
+    transition: width 0.4s ease;
+  }
+  .service-card:hover { background: #1a1a1a; }
+  .service-card:hover::before { width: 100%; }
+  .service-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 1.5rem;
+  }
+  .service-icon { width: 48px; height: 48px; margin-bottom: 1.5rem; color: var(--gold); }
+  .service-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.9rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 1rem;
+    line-height: 1;
+  }
+  .service-desc { font-size: 0.87rem; line-height: 1.75; color: var(--muted); margin-bottom: 1.8rem; }
+  .service-features { list-style: none; margin-bottom: 2.2rem; }
+  .service-features li {
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .service-features li::before { content: '—'; color: var(--gold); font-size: 0.7rem; flex-shrink: 0; }
+  .service-price-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+  .service-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    color: var(--gold);
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+  .price-type { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+  .btn-buy {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.5rem;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s;
+  }
+  .btn-buy:hover { background: var(--gold); color: var(--black); }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 6rem 4rem;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .contact-text p {
+    margin-top: 1.2rem;
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    max-width: 420px;
+  }
+  .contact-methods { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.5rem;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .contact-item:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+  .contact-item-icon {
+    width: 36px; height: 36px;
+    background: rgba(201,168,76,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .contact-item-type { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .contact-item-value { font-size: 0.88rem; color: var(--white); margin-top: 0.2rem; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--charcoal);
+    border: 1px solid var(--border);
+    width: 100%;
+    max-width: 480px;
+    padding: 3rem 2.5rem;
+    position: relative;
+    animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to   { opacity: 1; transform: none; }
+  }
+  .modal-close {
+    position: absolute;
+    top: 1.2rem; right: 1.4rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--white); }
+  .modal-label { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.05em; margin-bottom: 0.6rem; }
+  .modal-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 1.8rem; }
+  .form-group { margin-bottom: 1.3rem; }
+  .form-label { display: block; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+  .form-input {
+    width: 100%;
+    background: var(--black);
+    border: 1px solid var(--border);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.85rem 1rem;
+    outline: none;
+    transition: border-color 0.25s;
+  }
+  .form-input:focus { border-color: var(--gold); }
+  .modal-note {
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 1.2rem;
+    padding: 1rem;
+    border-left: 2px solid var(--gold);
+    background: rgba(201,168,76,0.04);
+  }
+
+  /* ── SUBMIT BUTTON + STATES ── */
+  .modal-submit {
+    width: 100%;
+    margin-top: 1.5rem;
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    transition: background 0.25s, opacity 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .modal-submit:hover:not(:disabled) { background: var(--gold-light); }
+  .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  /* spinner */
+  .spinner {
+    display: none;
+    width: 16px; height: 16px;
+    border: 2px solid rgba(0,0,0,0.3);
+    border-top-color: var(--black);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  .spinner.show { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* error banner */
+  .modal-error {
+    display: none;
+    margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    background: rgba(220,50,50,0.08);
+    border: 1px solid rgba(220,50,50,0.35);
+    color: #e07070;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+  .modal-error.show { display: block; }
+
+  /* ── SUCCESS STATE ── */
+  .modal-success { display: none; text-align: center; padding: 2rem 0; }
+  .modal-success.show { display: block; }
+  .modal-form.hide { display: none; }
+  .success-icon {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: var(--gold);
+    font-size: 1.8rem;
+  }
+  .success-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.05em; margin-bottom: 0.8rem; }
+  .success-text { font-size: 0.88rem; line-height: 1.75; color: var(--muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  footer span { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.8rem; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; padding: 7rem 1.8rem 3rem; text-align: center; }
+    .hero-cta { justify-content: center; flex-wrap: wrap; }
+    .hero-stats { justify-content: center; }
+    .hero-image-wrap { height: 55vw; margin-top: 3rem; }
+    .hero-bg-line { display: none; }
+    #services { padding: 5rem 1.8rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    #contact { grid-template-columns: 1fr; padding: 5rem 1.8rem; gap: 3rem; }
+    footer { flex-direction: column; gap: 0.8rem; padding: 2rem 1.8rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Prabhat Dangol</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">1-on-1</a></li>
+  </ul>
+  <a href="#services" class="btn-primary" style="font-size:0.72rem; padding:0.65rem 1.4rem;">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-line"></div>
+  <div class="hero-text">
+    <div class="hero-tag">Lifestyle and Fitness Coach</div>
+    <h1 class="hero-name">Prabhat<br><span>Dangol</span></h1>
+    <p class="hero-subtitle">
+      Build your best physique with expert-crafted programs. Whether you're after aesthetics, calisthenics, or making the most of a busy schedule — there's a plan for you.
+    </p>
+    <div class="hero-cta">
+      <a href="#services" class="btn-primary">View Programs</a>
+      <a href="#contact" class="btn-outline">Work With Me</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Specialist Programs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">EREPS</div>
+        <div class="stat-label">Personal Trainer</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-image-wrap">
+    <img class="hero-img" src="prabhat dangol image.jpg" alt="Prabhat Dangol">
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div class="section-label">Programs</div>
+    <h2 class="section-title">Choose Your Path</h2>
+    <p>Three focused programs built around your goals. One-time purchase — yours to keep and train with forever.</p>
+  </div>
+
+  <div class="services-grid">
+
+    <!-- Card 1: Calisthenics -->
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <svg class="service-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+      </svg>
+      <div class="service-name">Calisthenics</div>
+      <p class="service-desc">Master your bodyweight. Build real strength, skills, mobility, and control — no gym required.</p>
+      <ul class="service-features">
+        <li>Full bodyweight program</li>
+        <li>Progressive skill building</li>
+        <li>Mobility & flexibility work</li>
+        <li>Train anywhere, anytime</li>
+      </ul>
+      <div class="service-price-row">
+        <div>
+          <div class="service-price">$11.99</div>
+          <div class="price-type">One-time Purchase</div>
+        </div>
+        <button class="btn-buy" onclick="openModal('Calisthenics Program', '$11.99')">Buy Now</button>
+      </div>
+    </div>
+
+    <!-- Card 2: Aesthetic Physique -->
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <svg class="service-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+      </svg>
+      <div class="service-name">Aesthetic Physique</div>
+      <p class="service-desc">Sculpt a lean, proportional physique built for looks and performance. The full package.</p>
+      <ul class="service-features">
+        <li>Compound and Strength focused training</li>
+        <li>Muscle shaping & definition</li>
+        <li>Nutrition principles included</li>
+        <li>Gym-based program</li>
+      </ul>
+      <div class="service-price-row">
+        <div>
+          <div class="service-price">$19.99</div>
+          <div class="price-type">One-time Purchase</div>
+        </div>
+        <button class="btn-buy" onclick="openModal('Aesthetic Physique Program', '$19.99')">Buy Now</button>
+      </div>
+    </div>
+
+    <!-- Card 3: Busy People Plan -->
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <svg class="service-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <div class="service-name">Busy People Plan</div>
+      <p class="service-desc">Only 3 days a week, 30–45 minutes per session. No excuses. Real results around your schedule.</p>
+      <ul class="service-features">
+        <li>3 days / week only</li>
+        <li>30–45 min sessions</li>
+        <li>Efficient compound movements</li>
+        <li>Flexible scheduling</li>
+      </ul>
+      <div class="service-price-row">
+        <div>
+          <div class="service-price">$19.99</div>
+          <div class="price-type">One-time Purchase</div>
+        </div>
+        <button class="btn-buy" onclick="openModal('Busy People Plan', '$19.99')">Buy Now</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 1-ON-1 CONTACT -->
+<section id="contact">
+  <div class="contact-text">
+    <div class="section-label">Personal Coaching</div>
+    <h2 class="section-title">1-on-1<br>Coaching</h2>
+    <p>
+      Want a fully personalised plan built around your body, goals, and schedule? Reach out directly and let's talk. DM me on WhatsApp or drop me an email — I'll get back to you personally.
+    </p>
+    <div class="contact-methods">
+      <a class="contact-item" href="https://wa.me/9779815728319" target="_blank">
+        <div class="contact-item-icon">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div class="contact-item-info">
+          <div class="contact-item-type">WhatsApp</div>
+          <div class="contact-item-value">+977 9815728319</div>
+        </div>
+      </a>
+      <a class="contact-item" href="mailto:dangolprabhat115@gmail.com">
+        <div class="contact-item-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="contact-item-info">
+          <div class="contact-item-type">Email</div>
+          <div class="contact-item-value">dangolprabhat115@gmail.com</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div style="background: var(--card); border: 1px solid var(--border); padding: 3rem 2.5rem;">
+    <div class="section-label">How It Works</div>
+    <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
+      <div style="display: flex; gap: 1.2rem; align-items: flex-start;">
+        <div style="font-family: 'Bebas Neue'; font-size: 1.8rem; color: var(--gold); line-height: 1; flex-shrink: 0;">01</div>
+        <div>
+          <div style="font-weight: 500; font-size: 0.9rem; margin-bottom: 0.3rem;">Pick Your Program</div>
+          <div style="font-size: 0.8rem; color: var(--muted); line-height: 1.6;">Choose the plan that fits your goals above and click Buy Now.</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1.2rem; align-items: flex-start;">
+        <div style="font-family: 'Bebas Neue'; font-size: 1.8rem; color: var(--gold); line-height: 1; flex-shrink: 0;">02</div>
+        <div>
+          <div style="font-weight: 500; font-size: 0.9rem; margin-bottom: 0.3rem;">Submit Your Details</div>
+          <div style="font-size: 0.8rem; color: var(--muted); line-height: 1.6;">Leave your name and email so Prabhat knows where to send your program.</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1.2rem; align-items: flex-start;">
+        <div style="font-family: 'Bebas Neue'; font-size: 1.8rem; color: var(--gold); line-height: 1; flex-shrink: 0;">03</div>
+        <div>
+          <div style="font-weight: 500; font-size: 0.9rem; margin-bottom: 0.3rem;">Get Your Program</div>
+          <div style="font-size: 0.8rem; color: var(--muted); line-height: 1.6;">Prabhat will personally send you your full program. Start training immediately.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2025 <span>Prabhat Dangol</span> — EREPS Certified Personal Trainer</div>
+  <div>Your Lifestyle and Fitness Coach</div>
+</footer>
+
+<!-- PURCHASE MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+
+    <div class="modal-form" id="modalForm">
+      <div class="modal-label">Purchase</div>
+      <div class="modal-title" id="modalTitle">Program Name</div>
+      <div class="modal-price" id="modalPrice">$0.00</div>
+
+      <form id="orderForm">
+        <input type="hidden" name="program_name"  id="fieldProgram">
+        <input type="hidden" name="program_price" id="fieldPrice">
+
+        <div class="form-group">
+          <label class="form-label" for="buyerName">Your Name</label>
+          <input class="form-input" type="text" id="buyerName" name="user_name" placeholder="e.g. Alex Johnson" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="buyerEmail">Your Email</label>
+          <input class="form-input" type="email" id="buyerEmail" name="user_email" placeholder="you@example.com" autocomplete="email">
+        </div>
+
+        <div class="modal-note">
+          After submitting, Prabhat will review your order and send your program directly to your email — usually within 24 hours. Payment details will be shared via email or WhatsApp.
+        </div>
+
+        <div class="modal-error" id="modalError"></div>
+
+        <button type="button" class="modal-submit" id="submitBtn" onclick="submitOrder()">
+          <span id="submitLabel">Send My Order Request →</span>
+          <span class="spinner" id="submitSpinner"></span>
+        </button>
+      </form>
+    </div>
+
+    <div class="modal-success" id="modalSuccess">
+      <div class="success-icon">✓</div>
+      <div class="success-title">Request Sent!</div>
+      <p class="success-text">
+        Your order request for <strong id="successProgram" style="color:var(--gold)"></strong> has been sent to Prabhat.<br><br>
+        Check your email — he'll be in touch within 24 hours with payment details and your program.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  let currentProgram = '';
+  let currentPrice   = '';
+
+  function openModal(name, price) {
+    currentProgram = name;
+    currentPrice   = price;
+    document.getElementById('modalTitle').textContent  = name;
+    document.getElementById('modalPrice').textContent  = price;
+    document.getElementById('fieldProgram').value      = name;
+    document.getElementById('fieldPrice').value        = price;
+    document.getElementById('modal').classList.add('open');
+    document.getElementById('modalForm').classList.remove('hide');
+    document.getElementById('modalSuccess').classList.remove('show');
+    document.getElementById('buyerName').value  = '';
+    document.getElementById('buyerEmail').value = '';
+    hideError();
+    setLoading(false);
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+  }
+
+  function setLoading(on) {
+    const btn     = document.getElementById('submitBtn');
+    const label   = document.getElementById('submitLabel');
+    const spinner = document.getElementById('submitSpinner');
+    btn.disabled  = on;
+    label.textContent = on ? 'Sending…' : 'Send My Order Request →';
+    spinner.classList.toggle('show', on);
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('modalError');
+    el.textContent = msg;
+    el.classList.add('show');
+  }
+
+  function hideError() {
+    document.getElementById('modalError').classList.remove('show');
+  }
+
+  function submitOrder() {
+  hideError();
+
+  const name  = document.getElementById('buyerName').value.trim();
+  const email = document.getElementById('buyerEmail').value.trim();
+
+  if (!name || !email) {
+    showError('Please enter your name and email to continue.');
+    return;
+  }
+
+  const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailReg.test(email)) {
+    showError('Please enter a valid email address.');
+    return;
+  }
+
+  setLoading(true);
+
+  emailjs.sendForm(
+    "service_q7s5he9",
+    "template_57f1kp4",
+    document.getElementById('orderForm')
+  )
+  .then(function() {
+    document.getElementById('successProgram').textContent = currentProgram;
+    document.getElementById('modalForm').classList.add('hide');
+    document.getElementById('modalSuccess').classList.add('show');
+  })
+  .catch(function(error) {
+    console.error('EmailJS error:', error);
+    showError('Something went wrong. Please try again.');
+    setLoading(false);
+  });
+}
+
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+
+</body>
+</html>
